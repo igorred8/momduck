@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mujoco model="scene">
+  <include file="model.xml" />
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="160" elevation="-20" offwidth="1920" offheight="1080" />
+  </visual>
+  <keyframe>
+    <key name="INIT" qpos="0 0 0.160657 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" qvel="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" />
+    <key name="STAND" qpos="0 0 0.160657 1 0 0
+    0 0 -0.0873 -0.4579 -0.0049 0.453
+     0.3491 0.3491 0 0 0
+     0 0.0873 0.4579 0.0049 -0.453"
+      qvel="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+      ctrl="0 -0.0873 -0.4579 -0.0049 0.453
+      0.3491 0.3491 0 0
+      0 0.0873 0.4579 0.0049 -0.453" />
+    <key name="SIT" qpos="0 0 0.094537 1 0 0 0 0 0 0.5236 1.0472 0 0.5 1.6 0 0 0 0 0 -0.5236 -1.0472 0" qvel="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0.5236 1.0472 0 0.5 1.6 0 0 0 0 -0.5236 -1.0472 0" />
+  </keyframe>
+</mujoco>
