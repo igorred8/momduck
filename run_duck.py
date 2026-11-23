@@ -82,6 +82,8 @@ def quat_rotate_inverse(q, v):
 
 
 class Momduck:
+    yaw_bound = True
+
     def __init__(self, scene: Path, policy: Path):
         self.model = mujoco.MjModel.from_xml_path(str(scene))
         self.model.opt.timestep = PHYSICS_DT
@@ -134,8 +136,9 @@ class Momduck:
         action = self.session.run(
             [self.output_name], {self.input_name: obs.reshape(1, -1)})[0]
         action = action.squeeze(0).astype(np.float32)
-        yaw_ids = list(HIP_YAW_IDS)
-        action[yaw_ids] = np.clip(action[yaw_ids], -HIP_YAW_LIMIT, HIP_YAW_LIMIT)
+        if self.yaw_bound:
+            yaw_ids = list(HIP_YAW_IDS)
+            action[yaw_ids] = np.clip(action[yaw_ids], -HIP_YAW_LIMIT, HIP_YAW_LIMIT)
         self.last_action = action.copy()
         self.data.ctrl[:] = DEFAULT_POSE + action.clip(-ACTION_CLIP, ACTION_CLIP)
         for _ in range(DECIMATION):
@@ -305,12 +308,15 @@ def main():
     ap.add_argument("--azimuth", type=float, default=135.0,
                     help="азимут камеры записи, градусы (135 = спереди-справа)")
     ap.add_argument("--track", action="store_true", help="камера следит за уткой")
+    ap.add_argument("--no-yaw-bound", action="store_true",
+                    help="не ограничивать hip yaw ±10° (для оригинальной политики Pollen)")
     ap.add_argument("--stills", type=Path, default=None, help="каталог для PNG-кадров")
     ap.add_argument("--width", type=int, default=960)
     ap.add_argument("--height", type=int, default=720)
     args = ap.parse_args()
 
     duck = Momduck(args.scene, args.policy)
+    duck.yaw_bound = not args.no_yaw_bound
     if args.out or args.stills or args.gif:
         if args.out:
             args.out.parent.mkdir(parents=True, exist_ok=True)
