@@ -40,7 +40,7 @@
     <light directional="true" pos="0.4 0.4 0.8" dir="-0.3 -0.3 -0.9" diffuse="0.8 0.8 0.8" />
     <geom name="floor" size="0 0 0.05" pos="0 0 0" type="plane" material="grid" />
     <body name="trunk_base" pos="0 0 0">
-      <site name="imu" pos="0 0 0" size="0.005" group="4" rgba="0 1 0 1" quat="1 0 0 0" />
+      <site name="imu" pos="-0.021 6.64098e-05 -0.0146984" size="0.005" group="4" rgba="0 1 0 1" quat="1 0 0 0" />
       <freejoint name="trunk_base_freejoint" />
       <inertial pos="0.0155417716 -5.73402771e-05 0.00730641917" mass="0.37" diaginertia="0.000369964805 0.000530224688 0.000535636507" quat="0.664381568 0.493263028 0.450095974 -0.335711678" />
       <geom pos="0 0 0" quat="1 0 0 0" mesh="base_body_1_0" rgba="0.776470588 0.447058824 0.952941176 1" name="base_link_visual0" class="visual" />
